@@ -113,6 +113,14 @@ definitions:
         description: |-
           Unique identifier for this query response
         type: string
+      word:
+        description: |-
+          The word the query was run against
+        type: string
+      model:
+        description: |-
+          The unique identifier for the model used to generate this query
+        type: string
       results:
         description: |-
           List of words, with quality values, that match the query
@@ -144,6 +152,7 @@ definitions:
       model:
         description: |-
           The unique identifier for the training model to use in the query
+        type: string
     required:
       - word
       - model
@@ -162,6 +171,11 @@ paths:
             Valid server info response
           schema:
             $ref: "#/definitions/ServerInfo"
+          examples:
+            application/json:
+              application:
+                name: ophicleide-rest-server
+                version: 0.0.0
         default:
           description: |-
             Unexpected error
@@ -185,6 +199,15 @@ paths:
                 type: array
                 items:
                   $ref: "#/definitions/TrainingModel"
+          examples:
+            application/json:
+              models:
+                - id: 0ebf527c-9c54-43f3-89b5-abbc89b2f43b
+                  name: austen
+                  status: ready
+                  callback: http://10.0.1.2/model-callback
+                  urls:
+                    - https://ia600504.us.archive.org/25/items/thecompleteproje31100gut/31100.txt
         default:
           description: |-
             Unexpected error
@@ -214,7 +237,19 @@ paths:
                 URL of the training model
               type: string
           schema:
-            $ref: "#/definitions/TrainingModel"
+            properties:
+              model:
+                properties:
+                  $ref: "#/definitions/TrainingModel"
+          examples:
+            application/json:
+              model:
+                id: 0ebf527c-9c54-43f3-89b5-abbc89b2f43b
+                name: austen
+                status: training
+                callback: http://10.0.1.2/model-callback
+                urls:
+                  - https://ia600504.us.archive.org/25/items/thecompleteproje31100gut/31100.txt
         default:
           description: |-
             Unexpected error
@@ -243,6 +278,15 @@ paths:
               model:
                 properties:
                   $ref: "#/definitions/TrainingModel"
+          examples:
+            application/json:
+              model:
+                id: 0ebf527c-9c54-43f3-89b5-abbc89b2f43b
+                name: austen
+                status: ready
+                callback: http://10.0.1.2/model-callback
+                urls:
+                  - https://ia600504.us.archive.org/25/items/thecompleteproje31100gut/31100.txt
         default:
           description: |-
             Unexpected error
@@ -279,7 +323,28 @@ paths:
               queries:
                 type: array
                 items:
-                  $ref: "#/definitions/QueryResponse"
+                  type: object
+                  properties:
+                    id:
+                      description: |-
+                        The unique identifier for the query
+                      type: string
+                    word:
+                      description: |-
+                        The word that is the query is based around
+                    model:
+                      description: |-
+                        The unique identifier for the model used in this query
+                  required:
+                    - id
+                    - word
+                    - model
+          examples:
+            application/json:
+              queries:
+                - id: 214b0c0c-8d1c-4782-b590-512a915251b9
+                  word: darcy
+                  model: 0ebf527c-9c54-43f3-89b5-abbc89b2f43b
         default:
           description: |-
             Unexpected error
@@ -308,6 +373,67 @@ paths:
               query:
                 properties:
                   $ref: "#/definitions/QueryResponse"
+          examples:
+            application/json:
+              query:
+                id: 214b0c0c-8d1c-4782-b590-512a915251b9
+                word: darcy
+                model: 0ebf527c-9c54-43f3-89b5-abbc89b2f43b
+                results:
+                  - word: collins
+                    quality: 0.90567075215076964
+                  - word: wickham
+                    quality: 0.88194059217673426
+                  - word: bingley
+                    quality: 0.85862317778102093
+                  - word: willoughby
+                    quality: 0.78576338532794698
+                  - word: denny
+                    quality: 0.78273216128663947
+        default:
+          description: |-
+            Unexpected error
+          schema:
+            $ref: "#/definitions/ErrorResponse"
+  /queries/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: |-
+          The unique identifier for the query
+        required: true
+        type: string
+    get:
+      description: |-
+        Return detailed information for the specified query
+      operationId: findQuery
+      tags:
+        - queries
+      responses:
+        "200":
+          description: |-
+            Valid query detailed response
+          schema:
+            query:
+              properties:
+                $ref: "#/definitions/QueryResponse"
+          examples:
+            application/json:
+              query:
+                id: 214b0c0c-8d1c-4782-b590-512a915251b9
+                word: darcy
+                model: 0ebf527c-9c54-43f3-89b5-abbc89b2f43b
+                results:
+                  - word: collins
+                    quality: 0.90567075215076964
+                  - word: wickham
+                    quality: 0.88194059217673426
+                  - word: bingley
+                    quality: 0.85862317778102093
+                  - word: willoughby
+                    quality: 0.78576338532794698
+                  - word: denny
+                    quality: 0.78273216128663947
         default:
           description: |-
             Unexpected error
