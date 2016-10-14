@@ -6,7 +6,7 @@ the Ophicleide applications.
 
 This repository is intended to be built as a
 [GitHub Pages](https://pages.github.com) project, using the
-[Jekyll](https://jekyllrb.com) statis site generator.
+[Jekyll](https://jekyllrb.com) static site generator.
 
 **Contents**
 
