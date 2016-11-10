@@ -1,7 +1,7 @@
 ---
+title: Introduction
+link: introduction
 ---
-
-# Introduction
 
 Welcome to the documentation for the Ophicleide Word2vec application.
 Ophicleide is a cloud native application that provides users with an easy path
