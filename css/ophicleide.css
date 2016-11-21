@@ -1,5 +1,11 @@
 .contents
 {
     padding-top: 2em;
-    padding-left: 2em;
+    padding-left: 25%;
+}
+
+div#documents img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
