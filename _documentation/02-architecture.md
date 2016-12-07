@@ -25,7 +25,7 @@ processed, and to make single word similarity queries against those models.
 
 The following diagram shows the overall architecture of the Ophicleide suite.
 
-![Architecture drawing](/img/architecture.png)
+<img src="/img/architecture.svg" class="img-responsive">
 
 *Please note that the number of Spark containers is to demonstrate the use of a
 processing cluster and not an exact number.*
