@@ -30,7 +30,10 @@ Spark cluster, and a MongoDB datastore.
 2. OpenShift includes a MongDB template in its projects, you can read more
   about it in the
   [OpenShift documentation on MongoDB images](https://docs.openshift.org/latest/using_images/db_images/mongodb.html).
-  You will need to record the MongoDB connection URL from this installation.
+  Be sure to create a database named `ophicleide` when you deploy the MongoDB
+  as the ophicleide-training component will use this database for storing its
+  models and query results. You will need to record the MongoDB connection URL
+  from this installation.
 
 ## Ophicleide template
 
