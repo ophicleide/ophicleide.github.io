@@ -2,23 +2,27 @@
 layout: default
 ---
 
-<div class="row">
-  <div class="col-xs-3">
-    <div class="row">
-      <div class="contents">
-        <h4>Contents</h4>
-        {% for doc in site.documentation %}
-        <a href="#{{ doc.link }}">{{ doc.title }}</a><br/>
-        {% endfor %}
+{% include docs_menu.html %}
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-xs-3">
+      <div class="row">
+        <div class="contents">
+          <h4>Contents</h4>
+          {% for doc in site.documentation %}
+          <a href="#{{ doc.link }}">{{ doc.title }}</a><br/>
+          {% endfor %}
+        </div>
       </div>
     </div>
-  </div>
-  <div class="col-xs-6" id="documents">
-    {% for doc in site.documentation %}
-    <div class="row">
-      <h1 id="{{ doc.link }}">{{ doc.title }}</h1>
-      {{ doc.output }}
+    <div class="col-xs-6" id="documents">
+      {% for doc in site.documentation %}
+      <div class="row">
+        <h1 id="{{ doc.link }}">{{ doc.title }}</h1>
+        {{ doc.output }}
+      </div>
+      {% endfor %}
     </div>
-    {% endfor %}
   </div>
 </div>
