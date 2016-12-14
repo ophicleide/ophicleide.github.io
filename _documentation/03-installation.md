@@ -22,8 +22,10 @@ Ophicleide requires a few services to accomplish its processing: an Apache
 Spark cluster, and a MongoDB datastore.
 
 1. To install an Apache Spark cluster into your OpenShift project you can
-  use a project like
-  [oshinko-rest](https://github.com/radanalyticsio/oshinko-rest) to perform
+  use a project like the
+  [Oshinko OpenShift console extension](https://github.com/radanalyticsio/oshinko-console)
+  or the
+  [Oshinko rest server](https://github.com/radanalyticsio/oshinko-rest) to perform
   the deployment. You will need to record the Spark master URL from this
   deployment.
 
