@@ -36,3 +36,5 @@ defaults:
     path: ""
   values:
     menu_template: docs_menu.html
+
+appname: Ophicleide
